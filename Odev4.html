@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Alisveris</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="content">
+            <div class="marketting" id="productListEvent">
+                
+            </div>
+        </div>
+
+        <div class="productdetail d-none" id="productmodal">
+            
+        </div>
+        <script src="product.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            //------ClassList kullanarak onclick properties ini kullanmadan çalıştırdığım modal açma kodu
+            //const buttons = document.getElementsByClassName('opendetailBtn');
+            //for (let i = 0; i < buttons.length; i++) {
+            //    buttons[i].addEventListener('click', function() {
+            //        const element = document.getElementById('productmodal');
+            //        element.classList.remove("d-none");
+            //    });
+            //}
+            //------Bitiş
+
+            //CORSS Hatası aldığım için bu kodu Kullanamıyorum. Bu yüzden ayrı javascript dosyası oluşturarak çalıştırdım.
+            //var productList=[];
+            //fetch('products.json')
+            //    .then(response => response.json())
+            //    .then(products => {
+            //        productList=products;
+            //    });
+            
+            var ProductListHtml="";
+            productList.forEach(product=>{
+
+                ProductListHtml+=`
+                    <div class="product">
+                        <img class="img" src="img/${product.ProductImage}" alt="product" />
+                        <span class="productName">${product.ProductName}</span>
+                        <div class="stars-panel">
+                            <div class="stars">
+                                <i class="star ${(product.ProductPuan>=1?"active":"")} "></i>
+                                <i class="star ${(product.ProductPuan>=2?"active":"")} "></i>
+                                <i class="star ${(product.ProductPuan>=3?"active":"")} "></i>
+                                <i class="star ${(product.ProductPuan>=4?"active":"")} "></i>
+                                <i class="star ${(product.ProductPuan>=5?"active":"")} "></i>
+                            </div>
+                            <span class="review-count">${product.ProductReviewCount}</span>
+                        </div>
+                        <strong class="productPrice">${product.ProductPrice}</strong>
+                        <button onclick="active(${product.ProductId})" class="buttons opendetailBtn">Sepete Ekle</button>
+                    </div>
+                `;
+            });
+
+            document.getElementById('productListEvent').innerHTML = ProductListHtml;
+
+
+            function active(id){
+
+                const element = document.getElementById('productmodal');
+                element.classList.remove("d-none");
+                //var product = productList.find(item=>item.ProductId==id); //find ile array değişkenimde filtreleme yapmış oldum. filter özelliği array olarak find özelliği ise ilk bulduğu objeyi(datayı,veriyi) getirir. 
+                productList.forEach(product=>{
+                    if (product.ProductId==id){
+                        document.getElementById('productmodal').innerHTML =  `
+                        <div class="productHover" >
+                            <div class="productHoverImg">
+                                <img class="img" src="img/${product.ProductImage}" alt="product" />
+                            </div>
+
+                            <div class="productHoverText">
+                                <span class="productName">${product.ProductName}</span>
+                                <div class="stars-panel">
+                                    <div class="stars">
+                                        <i class="star ${(product.ProductPuan>=1?"active":"")} "></i>
+                                        <i class="star ${(product.ProductPuan>=2?"active":"")} "></i>
+                                        <i class="star ${(product.ProductPuan>=3?"active":"")} "></i>
+                                        <i class="star ${(product.ProductPuan>=4?"active":"")} "></i>
+                                        <i class="star ${(product.ProductPuan>=5?"active":"")} "></i>
+                                    </div>
+                                    <span class="review-count">${product.ProductReviewCount}</span>
+                                </div>
+                                <span class="productDetailText">${product.ProductContentText}</span>
+                                <strong class="productPrice">${product.ProductPrice}</strong>
+                                <div class="btnss">
+                                    <button onclick="inactive()" class="buttons ">Kapat</button>
+                                    <button onclick="alert('sepet yok')" class="buttons ">Sepete Ekle</button>
+                                </div>
+                            </div>
+                        </div>`;
+                    }
+                });
+                
+            }
+            function inactive(){
+                const element = document.getElementById('productmodal');
+                element.classList.add("d-none");
+            }
+        </script>
+    </body>
+</html>

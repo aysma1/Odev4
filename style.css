@@ -1,0 +1,194 @@
+*{
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.content{
+    background-color: white;
+}
+.marketting{
+    justify-content: center;
+    flex-wrap: wrap;
+    display: flex;
+    width: 100%;
+}
+.marketting .product {
+    border: 2px solid rgb(205, 205, 205);
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 4px;
+    flex-flow: column;
+    padding: 10px 0px;
+    margin: 15px 5px;
+    display: flex;
+    height: 270px;
+    width: 200px;
+}
+.marketting .product:hover{
+    background-color:rgb(244, 244, 244);
+}
+.stars-panel{
+    align-items: center;
+    display: flex;
+    gap:10px;
+}
+.stars-panel .review-count{
+    font-weight: 900;
+}
+.stars{
+    display: flex;
+    gap:5px;
+}
+.stars .star{
+    background-image: url('img/icons/star.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 21px;
+    width: 21px;
+}
+.stars .star.active{
+    background-image: url('img/icons/star-active.png');
+}
+.productPrice{
+    justify-content: center;
+    font-size: 25px;
+    display: flex;
+    color: red;
+}
+.marketting .product .buttons{
+    border: 1px solid rgb(196, 196, 196);
+    background: rgb(252, 252, 252);
+    transition: all 0.3s;
+    border-radius: 15px;
+    padding: 8px 10px;
+    width: 150px;
+}
+.marketting .product .buttons:hover{    
+    background-color: rgb(6, 160, 155);
+    border-color:rgb(0, 106, 95);
+    cursor:pointer;
+    color:white;
+}
+.marketting .product .img{
+    border-radius: 10px;
+    height: 130px;
+    padding: 10px;
+}
+.marketting .product .productName {
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    overflow:hidden;
+}
+
+/*Urun gosterimi*/
+.productdetail{
+    background: rgba(0,0,0,0.2);
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    left: 0px;
+    top: 0;
+}
+.productHover{
+    box-shadow: 0px 0px 4px rgba(255,255,255,0.5);
+    border: 1px solid rgb(237 237 237);
+    justify-content: space-between;
+    max-width: calc(100% - 30px);
+    background-color: white;
+    border-radius: 13px;
+    align-items: center;
+    display: flex;
+    height: 270px;
+    width: 530px;}
+/*
+.productHover {
+    border: 2px solid rgb(100, 100, 100);
+    background-color: rgb(216, 216, 216);
+    border-radius: 13px;
+    height: 270px;
+    width: 530px;
+    position: absolute; /* Hover Ã¶ÄŸesini sayfa iÃ§inde konumlandÄ±rmak iÃ§in 
+    top: 50%; /* Yatay merkezleme 
+    left: 50%; /* Dikey merkezleme 
+    transform: translate(-50%, -50%); /* GerÃ§ek merkezleme 
+    z-index: 10; /* Hover Ã¶ÄŸesini Ã¼st katmana almak iÃ§in 
+    display: flex;
+    justify-content: space-between;
+    padding: 35px;
+    align-items: center;
+}
+    */
+.productHoverText{
+    border-left: 1px solid #eee;
+    justify-content: center;
+    flex-flow: column;
+    display: flex;
+    padding: 10px;
+    height: 100%;    
+    width: 55%;
+    gap: 8px;
+}
+.productHover .btnss{
+    display: flex;
+    gap:20px;
+}
+
+.productHoverImg{
+    width: 45%;
+}
+.productHoverImg .img{
+    width: 100%;
+    padding: 15px;
+}
+.productHoverText .buttons{
+    border: 1px solid rgb(196, 196, 196);
+    background: rgb(252, 252, 252);
+    transition: all 0.3s;
+    border-radius: 15px;
+    padding: 8px 10px;
+    margin-left: auto;
+    width: 150px;
+}
+.productHoverText .buttons:hover{    
+    background-color: rgb(6, 160, 155);
+    border-color:rgb(0, 106, 95);
+    cursor:pointer;
+    color:white;
+}
+.productdetail .productPrice {
+    justify-content: end;
+}
+.productHoverText .productName {
+    font-weight: 600;
+}
+.productHoverText .stars-panel .star {
+    height: 14px;
+    width: 14px;
+}
+.productHoverText .stars-panel .review-count {
+    font-weight: 400;
+    font-size: 12px;
+}
+.productHoverText .stars-panel {
+    align-items: center;
+}
+.productHoverText .productDetailText {
+    max-height: 130px;
+    overflow-y: auto;
+}
+.d-none {
+    display: none;
+}
+@media screen and (max-width: 578px){
+    .productHover{
+        flex-flow: column;
+        height: auto;
+    }
+    .productHoverText{
+        border-left: none;
+    }
+}
