@@ -16,7 +16,6 @@
         <div class="productdetail d-none" id="productmodal">
             
         </div>
-        <script src="product.js" type="text/javascript"></script>
         <script type="text/javascript">
             //------ClassList kullanarak onclick properties ini kullanmadan çalıştırdığım modal açma kodu
             //const buttons = document.getElementsByClassName('opendetailBtn');
@@ -29,37 +28,35 @@
             //------Bitiş
 
             //CORSS Hatası aldığım için bu kodu Kullanamıyorum. Bu yüzden ayrı javascript dosyası oluşturarak çalıştırdım.
-            //var productList=[];
-            //fetch('products.json')
-            //    .then(response => response.json())
-            //    .then(products => {
-            //        productList=products;
-            //    });
-            
-            var ProductListHtml="";
-            productList.forEach(product=>{
+            var productList=[];
+            fetch('https://fakestoreapi.com/products/')
+                .then(response => response.json())
+                .then(products => {
+                    productList = products;
+                    let ProductListHtml = "";
 
-                ProductListHtml+=`
-                    <div class="product">
-                        <img class="img" src="img/${product.ProductImage}" alt="product" />
-                        <span class="productName">${product.ProductName}</span>
-                        <div class="stars-panel">
-                            <div class="stars">
-                                <i class="star ${(product.ProductPuan>=1?"active":"")} "></i>
-                                <i class="star ${(product.ProductPuan>=2?"active":"")} "></i>
-                                <i class="star ${(product.ProductPuan>=3?"active":"")} "></i>
-                                <i class="star ${(product.ProductPuan>=4?"active":"")} "></i>
-                                <i class="star ${(product.ProductPuan>=5?"active":"")} "></i>
+                    productList.forEach(product => {
+                        ProductListHtml += `
+                            <div class="product">
+                                <img class="img" src="${product.image}" alt="product" />
+                                <span class="productName">${product.title}</span>
+                                <div class="stars-panel">
+                                    <div class="stars">
+                                        <i class="star ${(product.rating.rate >= 1 ? "active" : "")}"></i>
+                                        <i class="star ${(product.rating.rate >= 2 ? "active" : "")}"></i>
+                                        <i class="star ${(product.rating.rate >= 3 ? "active" : "")}"></i>
+                                        <i class="star ${(product.rating.rate >= 4 ? "active" : "")}"></i>
+                                        <i class="star ${(product.rating.rate >= 5 ? "active" : "")}"></i>
+                                    </div>
+                                    <span class="review-count">${product.rating.count}</span>
+                                </div>
+                                <strong class="productPrice">${product.price} $</strong>
+                                <button onclick="active(${product.id})" class="buttons opendetailBtn">Sepete Ekle</button>
                             </div>
-                            <span class="review-count">${product.ProductReviewCount}</span>
-                        </div>
-                        <strong class="productPrice">${product.ProductPrice}</strong>
-                        <button onclick="active(${product.ProductId})" class="buttons opendetailBtn">Sepete Ekle</button>
-                    </div>
-                `;
-            });
-
-            document.getElementById('productListEvent').innerHTML = ProductListHtml;
+                        `;
+                    });
+                document.getElementById('productListEvent').innerHTML = ProductListHtml;
+                });
 
 
             function active(id){
@@ -68,30 +65,29 @@
                 element.classList.remove("d-none");
                 //var product = productList.find(item=>item.ProductId==id); //find ile array değişkenimde filtreleme yapmış oldum. filter özelliği array olarak find özelliği ise ilk bulduğu objeyi(datayı,veriyi) getirir. 
                 productList.forEach(product=>{
-                    if (product.ProductId==id){
+                    if (product.id==id){
                         document.getElementById('productmodal').innerHTML =  `
-                        <div class="productHover" >
+                        <div class="productHover">
                             <div class="productHoverImg">
-                                <img class="img" src="img/${product.ProductImage}" alt="product" />
+                                <img class="img" src="${product.image}" alt="product" />
                             </div>
-
                             <div class="productHoverText">
-                                <span class="productName">${product.ProductName}</span>
+                                <span class="productName">${product.title}</span>
                                 <div class="stars-panel">
                                     <div class="stars">
-                                        <i class="star ${(product.ProductPuan>=1?"active":"")} "></i>
-                                        <i class="star ${(product.ProductPuan>=2?"active":"")} "></i>
-                                        <i class="star ${(product.ProductPuan>=3?"active":"")} "></i>
-                                        <i class="star ${(product.ProductPuan>=4?"active":"")} "></i>
-                                        <i class="star ${(product.ProductPuan>=5?"active":"")} "></i>
+                                        <i class="star ${(product.rating.rate >= 1 ? "active" : "")}"></i>
+                                        <i class="star ${(product.rating.rate >= 2 ? "active" : "")}"></i>
+                                        <i class="star ${(product.rating.rate >= 3 ? "active" : "")}"></i>
+                                        <i class="star ${(product.rating.rate >= 4 ? "active" : "")}"></i>
+                                        <i class="star ${(product.rating.rate >= 5 ? "active" : "")}"></i>
                                     </div>
-                                    <span class="review-count">${product.ProductReviewCount}</span>
+                                    <span class="review-count">${product.rating.count}</span>
                                 </div>
-                                <span class="productDetailText">${product.ProductContentText}</span>
-                                <strong class="productPrice">${product.ProductPrice}</strong>
+                                <span class="productDetailText">${product.description}</span>
+                                <strong class="productPrice">${product.price} $</strong>
                                 <div class="btnss">
-                                    <button onclick="inactive()" class="buttons ">Kapat</button>
-                                    <button onclick="alert('sepet yok')" class="buttons ">Sepete Ekle</button>
+                                    <button onclick="inactive()" class="buttons">Kapat</button>
+                                    <button onclick="alert('sepet yok')" class="buttons">Sepete Ekle</button>
                                 </div>
                             </div>
                         </div>`;
